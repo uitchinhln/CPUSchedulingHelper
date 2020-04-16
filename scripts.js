@@ -1,7 +1,6 @@
 var n = 0, quantum = 0;
 var mat = new Array();
 var runTime = 0;
-var startTime = 0;
 function createTable() {
     var row = document.getElementById("process");
     var column = 5;
@@ -126,16 +125,17 @@ function solveData() {
             responseTime: -1,
             turnaroundTime: 0
         }        
-        if (runTime < mat[i].arrival) {
-            runTime = mat[i].arrival;
-        }
-        runTime += mat[i].burst;
     }
     quantum = getValue(document.getElementById("quantum"));
 
     //Arrange Arrival
     mat.sort((a, b) => a.arrival - b.arrival);
-    startTime = mat[0].arrival;
+    for (var i = 0; i < n; i++) {        
+        if (runTime < mat[i].arrival) {
+            runTime = mat[i].arrival;
+        }
+        runTime += mat[i].burst;
+    }
 
     FCFS();
     SJF();
@@ -255,7 +255,7 @@ function RR() {
     if (quantum <= 0) return;
     var temp = $.extend(true, [], mat);
     var queue = new Array();
-    var runningTime = startTime;
+    var runningTime = 0;
     var waitingTime = 0;
     var responseTime = 0;
     var turnaroundTime = 0;
@@ -301,12 +301,13 @@ function RR() {
         timingRow.appendChild(timeLabel);
 
         for (var i = 0; i < n; i++) {
-            if (temp[i].burst > 0) {
-                if (temp[i].arrival > runningTime && temp[i].arrival <= runningTime + nextStop) {
+            if (temp[i].burst > 0 && temp[i] != currentProcess) {
+                if (temp[i].arrival >= runningTime && temp[i].arrival <= runningTime + nextStop) {
                     queue.push(temp[i]);
                 }
             }
         }
+        
 
         currentProcess.waitingTime += runningTime - currentProcess.arrival;
         if (currentProcess.responseTime == -1) {
@@ -319,6 +320,9 @@ function RR() {
         currentProcess.burst -= nextStop;
 
         var t = queue.shift();
+        while (t != null && t.burst == 0) {
+            t = queue.shift();
+        }
         if (t != null) {
             if (currentProcess.burst > 0) {
                 queue.push(currentProcess);
@@ -365,7 +369,6 @@ function RR() {
 
 function PS_PRE() {
     var temp = $.extend(true, [], mat);
-    var data = new Array();
     var runningTime = 0;
     var waitingTime = 0;
     var responseTime = 0;
@@ -578,7 +581,6 @@ function PS() {
 
 function SRTF() {
     var temp = $.extend(true, [], mat);
-    var data = new Array();
     var runningTime = 0;
     var waitingTime = 0;
     var responseTime = 0;
