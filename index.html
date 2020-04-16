@@ -1,0 +1,81 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>CPU Scheduling Helper</title>
+    <meta name="description" content="CPU Scheduling Helper">
+    <meta name="author" content="Ngọc Chính">
+
+    <link rel="stylesheet" href="css/styles.css?v=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- jQuery --> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
+    <!-- Bootstrap 4 JS --> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+    <div class="container">
+        <div class="row">
+            <div style="margin-left: auto; margin-right: auto; display: block;">
+                <form action="">
+                    Enter number of processes: 
+                    <input type="text" id="process" style="width: 159px;">
+                    <input type="button" value="Submit" onclick="return createTable()">
+                    <input type="button" value="Solve" onclick="return solveData()" id="calculate" disabled>
+                </form>
+                  
+                <br>
+                
+                <div id="container">
+                
+                </div>
+            </div>
+            <div style="width: 100%; margin-top: 10px;">
+                <span style="font-family: arial, helvetica, sans-serif;"> <!-- tab --> 
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="fcfs-tab" data-toggle="tab" href="#fcfs" role="tab" aria-controls="home" aria-selected="true">FCFS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="sjf-tab" data-toggle="tab" href="#sjf" role="tab" aria-controls="profile" aria-selected="false">SJF</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="sjf-tab" data-toggle="tab" href="#srtf" role="tab" aria-controls="profile" aria-selected="false">SRTF</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="ps-tab" data-toggle="tab" href="#ps" role="tab" aria-controls="contact" aria-selected="false">PS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="ps-tab" data-toggle="tab" href="#ps-pre" role="tab" aria-controls="contact" aria-selected="false">PS Preemptive</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="rr-tab" data-toggle="tab" href="#rr" role="tab" aria-controls="contact" aria-selected="false">RR</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="hrrn-tab" data-toggle="tab" href="#hrrn" role="tab" aria-controls="contact" aria-selected="false">HRRN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="mq-tab" data-toggle="tab" href="#mq" role="tab" aria-controls="contact" aria-selected="false">MQ-MFQ</a>
+                        </li>
+                    </ul>
+                    <!-- Nội dung -->
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="fcfs" role="tabpanel"></div>
+                        <div class="tab-pane fade" id="sjf" role="tabpanel"></div>
+                        <div class="tab-pane fade" id="srtf" role="tabpanel"></div>
+                        <div class="tab-pane fade" id="ps" role="tabpanel"></div>
+                        <div class="tab-pane fade" id="ps-pre" role="tabpanel"></div>
+                        <div class="tab-pane fade" id="rr" role="tabpanel"></div>
+                        <div class="tab-pane fade" id="hrrn" role="tabpanel"></div>
+                        <div class="tab-pane fade" id="mq" role="tabpanel"></div>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>    
+    <script src="js/scripts.js"></script>
+</body>
+</html>
