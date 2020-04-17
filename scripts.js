@@ -301,9 +301,10 @@ function RR() {
         timingRow.appendChild(timeLabel);
 
         for (var i = 0; i < n; i++) {
-            if (temp[i].burst > 0 && temp[i] != currentProcess) {
+            if (temp[i].burst > 0 && temp[i].pId != currentProcess.pId) {
                 if (temp[i].arrival >= runningTime && temp[i].arrival <= runningTime + nextStop) {
                     queue.push(temp[i]);
+                    console.log("in running, push: "+temp[i].pId);
                 }
             }
         }
@@ -319,14 +320,8 @@ function RR() {
         currentProcess.arrival = runningTime;
         currentProcess.burst -= nextStop;
 
-        var t = queue.shift();
-        while (t != null && t.burst == 0) {
-            t = queue.shift();
-        }
+        var t = queue.shift();        
         if (t != null) {
-            if (currentProcess.burst > 0) {
-                queue.push(currentProcess);
-            }
             currentProcess = t;
         } else {
             if (currentProcess.burst <= 0) {
