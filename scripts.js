@@ -307,7 +307,7 @@ function RR() {
 
         for (var i = 0; i < n; i++) {
             if (temp[i].burst > 0 && temp[i].pId != currentProcess.pId) {
-                if (temp[i].arrival >= runningTime && temp[i].arrival < runningTime + nextStop) {
+                if (temp[i].arrival >= runningTime && temp[i].arrival <= runningTime + nextStop) {
                     queue.push(temp[i]);
                     console.log("in running, push: "+temp[i].pId);
                 }
