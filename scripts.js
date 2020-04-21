@@ -197,12 +197,15 @@ function HRRN() {
         timingRow.appendChild(timeLabel);        
 
         for (var j = 0; j < n; j++) {
-            if (temp[j].burst > 0  && temp[j] != currentProcess) {
-                if (temp[j].arrival >= runningTime && temp[j].arrival <= runningTime + currentProcess.burst) {
+            if (temp[j].burst > 0  && temp[j].pId != currentProcess.pId) {
+                console.log("P"+temp[j].pId + ": " + temp[j].arrival + "/" + runningTime);
+                if (temp[j].arrival >= runningTime && temp[j].arrival < runningTime + currentProcess.burst) {
                     queue.push(temp[j]);
+                    console.log("P"+temp[j].pId);
                 }
             }
         }
+        console.log("-------------------");
 
         currentProcess.waitingTime = runningTime - currentProcess.arrival;
         currentProcess.responseTime = runningTime - currentProcess.arrival;
@@ -211,6 +214,8 @@ function HRRN() {
         waitingTime += currentProcess.waitingTime;
         responseTime += currentProcess.responseTime;
         turnaroundTime += currentProcess.turnaroundTime;
+
+        currentProcess.burst = 0;
 
         queue.sort((a, b) => {
             var tspenWA = runningTime - a.arrival;
@@ -302,7 +307,7 @@ function RR() {
 
         for (var i = 0; i < n; i++) {
             if (temp[i].burst > 0 && temp[i].pId != currentProcess.pId) {
-                if (temp[i].arrival >= runningTime && temp[i].arrival <= runningTime + nextStop) {
+                if (temp[i].arrival >= runningTime && temp[i].arrival < runningTime + nextStop) {
                     queue.push(temp[i]);
                     console.log("in running, push: "+temp[i].pId);
                 }
