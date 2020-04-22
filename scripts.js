@@ -307,8 +307,8 @@ function RR() {
 
 
         for (var i = 0; i < n; i++) {
-            if (temp[i].burst > 0 && temp[i].pId != currentProcess.pId) {
-                if (temp[i].arrival > runningTime && temp[i].arrival <= runningTime + nextStop) {
+            if (temp[i].burst > 0 && temp[i].pId != currentProcess.pId && !queue.includes(temp[i])) {
+                if (temp[i].arrival >= runningTime && temp[i].arrival <= runningTime + nextStop) {
                     queue.push(temp[i]);
                     console.log("in running, push: "+temp[i].pId + ", burst: " + temp[i].burst);
                 }
@@ -332,7 +332,8 @@ function RR() {
         }
         console.log("--------------------------");
 
-        var t = queue.shift();        
+        var t = queue.shift();  
+        console.log(t== null);      
         if (t != null) {
             currentProcess = t;
         } else {
