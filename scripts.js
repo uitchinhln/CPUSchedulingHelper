@@ -198,14 +198,14 @@ function HRRN() {
 
         for (var j = 0; j < n; j++) {
             if (temp[j].burst > 0  && temp[j].pId != currentProcess.pId) {
-                console.log("P"+temp[j].pId + ": " + temp[j].arrival + "/" + runningTime);
+                // console.log("P"+temp[j].pId + ": " + temp[j].arrival + "/" + runningTime);
                 if (temp[j].arrival >= runningTime && temp[j].arrival < runningTime + currentProcess.burst) {
                     queue.push(temp[j]);
                     console.log("P"+temp[j].pId);
                 }
             }
         }
-        console.log("-------------------");
+        // console.log("-------------------");
 
         currentProcess.waitingTime = runningTime - currentProcess.arrival;
         currentProcess.responseTime = runningTime - currentProcess.arrival;
@@ -305,11 +305,12 @@ function RR() {
         ganttRow.appendChild(pLabel);
         timingRow.appendChild(timeLabel);
 
+
         for (var i = 0; i < n; i++) {
             if (temp[i].burst > 0 && temp[i].pId != currentProcess.pId) {
-                if (temp[i].arrival >= runningTime && temp[i].arrival <= runningTime + nextStop) {
+                if (temp[i].arrival > runningTime && temp[i].arrival <= runningTime + nextStop) {
                     queue.push(temp[i]);
-                    console.log("in running, push: "+temp[i].pId);
+                    console.log("in running, push: "+temp[i].pId + ", burst: " + temp[i].burst);
                 }
             }
         }
@@ -324,6 +325,12 @@ function RR() {
         
         currentProcess.arrival = runningTime;
         currentProcess.burst -= nextStop;
+
+        if (currentProcess.burst > 0) {
+            queue.push(currentProcess);
+            console.log("after running, push: "+currentProcess.pId + ", burst: " + currentProcess.burst);
+        }
+        console.log("--------------------------");
 
         var t = queue.shift();        
         if (t != null) {
