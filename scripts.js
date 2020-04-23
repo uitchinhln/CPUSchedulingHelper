@@ -875,7 +875,7 @@ function FCFS() {
         responseTime += data[i].responseTime;
         turnaroundTime += data[i].turnaroundTime;
 
-        textGantt = textGantt + " – P" + (currentProcess.pId + 1) + " – " + runningTime;
+        textGantt = textGantt + " – P" + (data[i].pId + 1) + " – " + runningTime;
     }    
 
     data.sort((a, b) => a.pId - b.pId);
