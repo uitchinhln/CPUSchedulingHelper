@@ -155,6 +155,7 @@ function HRRN() {
     var waitingTime = 0;
     var responseTime = 0;
     var turnaroundTime = 0;
+    var textGantt = "Text Gantt: 0";
 
     var ganttRow = document.createElement("tr");
     ganttRow.bgColor = "#4CAF50";
@@ -215,6 +216,8 @@ function HRRN() {
         responseTime += currentProcess.responseTime;
         turnaroundTime += currentProcess.turnaroundTime;
 
+        textGantt = textGantt + " – P" + (currentProcess.pId + 1) + " – " + runningTime;
+
         currentProcess.burst = 0;
 
         queue.sort((a, b) => {
@@ -251,6 +254,7 @@ function HRRN() {
 
     var container = document.getElementById("hrrn");
     container.appendChild(ganttTable);
+    container.appendChild(document.createTextNode(textGantt));
 
     //Print data
     showResult(temp, waitingTime, responseTime, turnaroundTime, container);
@@ -264,6 +268,7 @@ function RR() {
     var waitingTime = 0;
     var responseTime = 0;
     var turnaroundTime = 0;
+    var textGantt = "Text Gantt: 0";
 
     var ganttRow = document.createElement("tr");
     ganttRow.bgColor = "#4CAF50";
@@ -305,7 +310,6 @@ function RR() {
         ganttRow.appendChild(pLabel);
         timingRow.appendChild(timeLabel);
 
-
         for (var i = 0; i < n; i++) {
             if (temp[i].burst > 0 && temp[i].pId != currentProcess.pId && !queue.includes(temp[i])) {
                 if (temp[i].arrival >= runningTime && temp[i].arrival <= runningTime + nextStop) {
@@ -325,6 +329,8 @@ function RR() {
         
         currentProcess.arrival = runningTime;
         currentProcess.burst -= nextStop;
+
+        textGantt = textGantt + " – P" + (currentProcess.pId + 1) + " – " + runningTime;
 
         if (currentProcess.burst > 0) {
             queue.push(currentProcess);
@@ -370,6 +376,7 @@ function RR() {
 
     var container = document.getElementById("rr");
     container.appendChild(ganttTable);
+    container.appendChild(document.createTextNode(textGantt));
 
     //Print data
     showResult(temp, waitingTime, responseTime, turnaroundTime, container);
@@ -381,6 +388,7 @@ function PS_PRE() {
     var waitingTime = 0;
     var responseTime = 0;
     var turnaroundTime = 0;
+    var textGantt = "Text Gantt: 0";
 
     var ganttRow = document.createElement("tr");
     ganttRow.bgColor = "#4CAF50";
@@ -441,6 +449,8 @@ function PS_PRE() {
         currentProcess.arrival = runningTime;
         currentProcess.burst -= nextStop;
 
+        textGantt = textGantt + " – P" + (currentProcess.pId + 1) + " – " + runningTime;
+
         mat.sort((a, b) => a.arrival - b.arrival);
         for (var i = 0; i < n; i++) {
             if (temp[i].burst > 0) {
@@ -483,6 +493,7 @@ function PS_PRE() {
 
     var container = document.getElementById("ps-pre");
     container.appendChild(ganttTable);
+    container.appendChild(document.createTextNode(textGantt));
 
     //Print data
     showResult(temp, waitingTime, responseTime, turnaroundTime, container);
@@ -495,6 +506,7 @@ function PS() {
     var waitingTime = 0;
     var responseTime = 0;
     var turnaroundTime = 0;
+    var textGantt = "Text Gantt: 0";
 
     var ganttRow = document.createElement("tr");
     ganttRow.bgColor = "#4CAF50";
@@ -546,6 +558,8 @@ function PS() {
         responseTime += currentProcess.responseTime;
         turnaroundTime += currentProcess.turnaroundTime;
 
+        textGantt = textGantt + " – P" + (currentProcess.pId + 1) + " – " + runningTime;
+
         data.push(currentProcess);
 
         var min = 2147483647;
@@ -582,6 +596,7 @@ function PS() {
 
     var container = document.getElementById("ps");
     container.appendChild(ganttTable);
+    container.appendChild(document.createTextNode(textGantt));
 
     //Print data
     showResult(data, waitingTime, responseTime, turnaroundTime, container);
@@ -593,6 +608,7 @@ function SRTF() {
     var waitingTime = 0;
     var responseTime = 0;
     var turnaroundTime = 0;
+    var textGantt = "Text Gantt: 0";
 
     var ganttRow = document.createElement("tr");
     ganttRow.bgColor = "#4CAF50";
@@ -653,6 +669,8 @@ function SRTF() {
         currentProcess.arrival = runningTime;
         currentProcess.burst -= nextStop;
 
+        textGantt = textGantt + " – P" + (currentProcess.pId + 1) + " – " + runningTime;
+
         mat.sort((a, b) => a.arrival - b.arrival);
         for (var i = 0; i < n; i++) {
             if (temp[i].burst > 0) {
@@ -695,6 +713,7 @@ function SRTF() {
 
     var container = document.getElementById("srtf");
     container.appendChild(ganttTable);
+    container.appendChild(document.createTextNode(textGantt));
 
     //Print data
     showResult(temp, waitingTime, responseTime, turnaroundTime, container);
@@ -707,6 +726,7 @@ function SJF() {
     var waitingTime = 0;
     var responseTime = 0;
     var turnaroundTime = 0;
+    var textGantt = "Text Gantt: 0";
 
     var ganttRow = document.createElement("tr");
     ganttRow.bgColor = "#4CAF50";
@@ -755,7 +775,9 @@ function SJF() {
         runningTime += currentProcess.burst;
         waitingTime += currentProcess.waitingTime;
         responseTime += currentProcess.responseTime;
-        turnaroundTime += currentProcess.turnaroundTime;        
+        turnaroundTime += currentProcess.turnaroundTime;  
+
+        textGantt = textGantt + " – P" + (currentProcess.pId + 1) + " – " + runningTime;      
 
         data.push(currentProcess);
 
@@ -793,6 +815,7 @@ function SJF() {
 
     var container = document.getElementById("sjf");
     container.appendChild(ganttTable);
+    container.appendChild(document.createTextNode(textGantt));
 
     //Print data
     showResult(data, waitingTime, responseTime, turnaroundTime, container);
@@ -804,6 +827,7 @@ function FCFS() {
     var waitingTime = 0;
     var responseTime = 0;
     var turnaroundTime = 0;
+    var textGantt = "Text Gantt: 0";
 
     var ganttRow = document.createElement("tr");
     ganttRow.bgColor = "#4CAF50";
@@ -850,6 +874,8 @@ function FCFS() {
         waitingTime += data[i].waitingTime;
         responseTime += data[i].responseTime;
         turnaroundTime += data[i].turnaroundTime;
+
+        textGantt = textGantt + " – P" + (currentProcess.pId + 1) + " – " + runningTime;
     }    
 
     data.sort((a, b) => a.pId - b.pId);
@@ -865,6 +891,7 @@ function FCFS() {
 
     var container = document.getElementById("fcfs");
     container.appendChild(ganttTable);
+    container.appendChild(document.createTextNode(textGantt));
 
     //Print data
     showResult(data, waitingTime, responseTime, turnaroundTime, container);
