@@ -402,7 +402,7 @@ function PS_PRE() {
     for (var i = 0; i < n; i++) {
         if (temp[i].arrival > runningTime && temp[i].arrival - runningTime <= nextStop) {
             if (temp[i].order < currentProcess.order) {
-                nextStop = temp[i].arrival - runningTime;
+                nextStop = temp[i].arrival - currentProcess.arrival;
                 break;
             }
         }     
@@ -622,7 +622,7 @@ function SRTF() {
     for (var i = 0; i < n; i++) {
         if (temp[i].arrival > runningTime && temp[i].arrival - runningTime <= nextStop) {
             if (temp[i].burst < currentProcess.burst - (temp[i].arrival - runningTime)) {
-                nextStop = temp[i].arrival - runningTime;
+                nextStop = temp[i].arrival - currentProcess.arrival;
                 break;
             }
         }     
