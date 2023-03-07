@@ -254,7 +254,7 @@ function HRRN() {
 
     var container = document.getElementById("hrrn");
     container.appendChild(ganttTable);
-    container.appendChild(document.createTextNode(textGantt));
+    container.appendChild("");
 
     //Print data
     showResult(temp, waitingTime, responseTime, turnaroundTime, container);
@@ -376,7 +376,7 @@ function RR() {
 
     var container = document.getElementById("rr");
     container.appendChild(ganttTable);
-    container.appendChild(document.createTextNode(textGantt));
+    container.appendChild("");
 
     //Print data
     showResult(temp, waitingTime, responseTime, turnaroundTime, container);
@@ -493,7 +493,7 @@ function PS_PRE() {
 
     var container = document.getElementById("ps-pre");
     container.appendChild(ganttTable);
-    container.appendChild(document.createTextNode(textGantt));
+    container.appendChild("");
 
     //Print data
     showResult(temp, waitingTime, responseTime, turnaroundTime, container);
@@ -596,7 +596,7 @@ function PS() {
 
     var container = document.getElementById("ps");
     container.appendChild(ganttTable);
-    container.appendChild(document.createTextNode(textGantt));
+    container.appendChild("");
 
     //Print data
     showResult(data, waitingTime, responseTime, turnaroundTime, container);
@@ -713,7 +713,7 @@ function SRTF() {
 
     var container = document.getElementById("srtf");
     container.appendChild(ganttTable);
-    container.appendChild(document.createTextNode(textGantt));
+    container.appendChild("");
 
     //Print data
     showResult(temp, waitingTime, responseTime, turnaroundTime, container);
@@ -815,7 +815,7 @@ function SJF() {
 
     var container = document.getElementById("sjf");
     container.appendChild(ganttTable);
-    container.appendChild(document.createTextNode(textGantt));
+    container.appendChild("");
 
     //Print data
     showResult(data, waitingTime, responseTime, turnaroundTime, container);
@@ -891,7 +891,7 @@ function FCFS() {
 
     var container = document.getElementById("fcfs");
     container.appendChild(ganttTable);
-    container.appendChild(document.createTextNode(textGantt));
+    container.appendChild("");
 
     //Print data
     showResult(data, waitingTime, responseTime, turnaroundTime, container);
